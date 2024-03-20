@@ -3,8 +3,9 @@ class ApiError extends Error {
         statusCode,
         message= "Something went wrong",
         errors = [],
-        stack = ""
+        stack = ""//The error.stack property is a string describing the point in the code at which the Error was instantiated.
     ){
+        // overiding in class Error
         super(message)
         this.statusCode = statusCode
         this.data = null
@@ -15,7 +16,7 @@ class ApiError extends Error {
         if (stack) {
             this.stack = stack
         } else{
-            Error.captureStackTrace(this, this.constructor)
+            Error.captureStackTrace(this, this.constructor)// caputure no. off error in stack
         }
 
        
