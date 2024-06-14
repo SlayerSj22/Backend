@@ -26,6 +26,29 @@ const uploadOnCloudinary = async (localFilePath) => {
     }
 }
 
+  const deleteFileOnCloudinary = async (url)=> {
+
+    if (!url) {
+        console.error('URL is empty');
+        return null;
+      }
+
+    try {
+      const assetDetails = await cloudinary.api.resource(url);
+      const publicId = assetDetails.public_id;
+      const result = await cloudinary.uploader.destroy(publicId);
+    //   console.log(result);
+
+    return result;
+      // Result will contain information about the deletion if successful
+    } catch (error) {
+      console.error('Error deleting file:', error);
+        return null;
+    }
+  }
 
 
-export {uploadOnCloudinary}
+
+
+
+export {uploadOnCloudinary,deleteFileOnCloudinary}
